@@ -1,0 +1,39 @@
+/* Swiper main container */
+.swiper {
+  width: 100%;
+  padding-bottom: 70px;
+  overflow-x: hidden; /* 🔥 KEY FIX */
+}
+
+/* Swiper slides */
+.swiper-slide {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Pagination bullets */
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #181a1e;
+  opacity: 1;
+  background: #ffffff;
+}
+
+.swiper-pagination-bullet-active {
+  background: #B71C1C;
+  border: none;
+}
+
+/* Highlight next slide */
+.swiper-slide.swiper-slide-next {
+  background: #B71C1C;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgb(249 115 22 / 0.15);
+}
+
+/* Text color inside active slide */
+.swiper-slide.swiper-slide-next h4,
+.swiper-slide.swiper-slide-next p {
+  color: #ffffff;
+}

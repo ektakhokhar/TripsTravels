@@ -1,0 +1,189 @@
+/* ================================
+   TAILWIND
+================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   GLOBAL RESET
+================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: "Roboto", sans-serif;
+}
+
+/* ================================
+   LAYOUT VARIABLES
+================================ */
+:root {
+  --header-height: 80px; /* adjust if header height differs */
+}
+
+/* ================================
+   HERO FIX (MAIN ISSUE)
+================================ */
+/* hero wrapper class MUST be applied in JSX */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* background image/video inside hero */
+.hero img,
+.hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay gradient */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.45)
+  );
+  z-index: 1;
+}
+
+/* hero content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* ================================
+   SLICK FIX
+================================ */
+.slick-slider,
+.slick-list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  display: flex !important;
+  height: auto;
+}
+
+/* ================================
+   SWIPER FIX
+================================ */
+.swiper {
+  width: 100%;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+.swiper-wrapper {
+  align-items: stretch;
+}
+
+.swiper-slide {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ================================
+   BUTTON FIX
+================================ */
+.btn,
+.Searchbtn,
+.Bluebtn,
+.Redbtn,
+.Greenbtn {
+  padding: 10px 25px;
+  font-weight: 600;
+  border-radius: 6px;
+  color: white;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.btn:hover,
+.Searchbtn:hover,
+.Bluebtn:hover,
+.Redbtn:hover,
+.Greenbtn:hover {
+  transform: scale(1.05);
+}
+
+/* ================================
+   TYPOGRAPHY
+================================ */
+.heading {
+  font-size: 45px;
+  color: #b71c1c;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 600;
+  padding-top: 20px;
+}
+
+.para {
+  width: 100%;
+  color: rgb(75, 75, 75);
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+/* ================================
+   FORMS
+================================ */
+.form_input,
+.booking_input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+}
+
+.form_input:focus,
+.booking_input:focus {
+  outline: none;
+}
+
+/* ================================
+   PAGINATION
+================================ */
+.spn,
+.active_page {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
