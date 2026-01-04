@@ -28,7 +28,7 @@ const hotelSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "hotel", // 👈 THIS LINE FIXES EVERYTHING
+    collection: "hotel", 
   }
 );
 

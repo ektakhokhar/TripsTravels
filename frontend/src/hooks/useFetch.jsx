@@ -8,19 +8,16 @@ const useFetch = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-
         const response = await fetch(url);
+
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
 
         const result = await response.json();
 
-        // ✅ Works for both formats:
-        // { success: true, data: [...] }
-        // OR [ ... ]
-        setApiData(Array.isArray(result) ? result : result.data || []);
+        // works for both { data: [] } and []
+        setApiData(Array.isArray(result) ? result : result.data);
       } catch (err) {
         setError(err.message);
       } finally {
