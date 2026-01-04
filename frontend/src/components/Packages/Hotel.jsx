@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import useFetch from "../hooks/useFetch";
+import BASE_URL from "../utils/config";
 
 const Hotel = () => {
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/hotel");
-        setHotels(res.data);
-      } catch (error) {
-        console.error("Error fetching hotels", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHotels();
-  }, []);
+  const {
+    apiData: hotels,
+    loading,
+    error,
+  } = useFetch(`${BASE_URL}/hotel`);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#061225] text-white">
         Loading Hotels...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#061225] text-red-400">
+        {error}
       </div>
     );
   }
@@ -47,12 +43,11 @@ const Hotel = () => {
           >
             {/* Image */}
             <img
-  src={`${hotel.photo}?w=600&auto=format&fit=crop&q=70`}
-  alt={hotel.name}
-  loading="lazy"
-  className="h-52 w-full object-cover"
-/>
-
+              src={hotel.photo}
+              alt={hotel.name}
+              loading="lazy"
+              className="h-52 w-full object-cover"
+            />
 
             {/* Content */}
             <div className="p-5">
@@ -67,7 +62,6 @@ const Hotel = () => {
                 {hotel.desc}
               </p>
 
-              {/* Price & Rating */}
               <div className="flex justify-between items-center mt-4">
                 <span className="text-lg font-bold text-blue-600">
                   ₹{hotel.price}
@@ -78,7 +72,6 @@ const Hotel = () => {
                 </span>
               </div>
 
-              {/* Button */}
               <button className="mt-5 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
                 Book Now
               </button>
