@@ -36,9 +36,10 @@ connectDB();
 
 // Middleware for CORS and JSON parsing
 const allowedOrigins = [
-  
   "http://localhost:5173",
+  "https://trips-travels-ten.vercel.app"
 ];
+
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -48,8 +49,10 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
