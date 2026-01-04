@@ -19,7 +19,8 @@ const getAllTours = async (req, res) => {
       count: tours.length,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("GET ALL TOURS ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -39,7 +40,8 @@ const getSingleTour = async (req, res) => {
       data: tour,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("GET SINGLE TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -48,28 +50,7 @@ const getSingleTour = async (req, res) => {
 ========================= */
 const createTour = async (req, res) => {
   try {
-    const {
-      title,
-      city,
-      desc,
-      photo,
-      price,
-      maxGroupSize,
-      tourType,      // india / international
-      featured,
-    } = req.body;
-
-    const newTour = new Tour({
-      title,
-      city,
-      desc,
-      photo,
-      price,
-      maxGroupSize,
-      tourType,
-      featured,
-    });
-
+    const newTour = new Tour(req.body);
     await newTour.save();
 
     res.status(201).json({
@@ -78,7 +59,8 @@ const createTour = async (req, res) => {
       data: newTour,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("CREATE TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -103,7 +85,8 @@ const updateTour = async (req, res) => {
       data: updatedTour,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("UPDATE TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -123,7 +106,8 @@ const deleteTour = async (req, res) => {
       message: "Tour deleted successfully",
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("DELETE TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -150,7 +134,8 @@ const getTourBySearch = async (req, res) => {
       count: tours.length,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("SEARCH TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -166,7 +151,8 @@ const getFeaturedTour = async (req, res) => {
       data: tours,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("FEATURED TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -178,7 +164,8 @@ const getIndiaTours = async (req, res) => {
     const tours = await Tour.find({ tourType: "india" });
     res.status(200).json(tours);
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("INDIA TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -190,7 +177,8 @@ const getInternationalTours = async (req, res) => {
     const tours = await Tour.find({ tourType: "international" });
     res.status(200).json(tours);
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("INTERNATIONAL TOUR ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -202,7 +190,8 @@ const getTourCount = async (req, res) => {
     const count = await Tour.countDocuments();
     res.status(200).json({ success: true, data: count });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("TOUR COUNT ERROR:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 

@@ -15,10 +15,24 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3050;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("DB connected"))
-  .catch((err) => console.log(err));
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "tour",
+    });
+    isConnected = true;
+    console.log("DB connected");
+  } catch (err) {
+    console.error("DB connection error:", err);
+  }
+};
+
+connectDB();
+
 
 // Middleware for CORS and JSON parsing
 const allowedOrigins = [
